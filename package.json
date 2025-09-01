@@ -1,6 +1,6 @@
 {
   "name": "react-zeltra",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Kickstart React projects with Vite, TypeScript, Tailwind, ESLint, Router, State management, Lucide, and Axios.",
   "main": "index.js",
   "type": "module",
