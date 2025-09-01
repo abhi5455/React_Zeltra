@@ -198,7 +198,8 @@ export default {
 }`;
             writeFile('tailwind.config.js', tailwindConfig);
 
-            const viteConfigPath = path.join(projectPath, `vite.config.${typescript ? 'ts' : 'js'}`);
+            // const viteConfigPath = path.join(projectPath, `vite.config.${typescript ? 'ts' : 'js'}`);
+            const viteConfigPath = `vite.config.${typescript ? 'ts' : 'js'}`;
             const viteConfig = `import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
