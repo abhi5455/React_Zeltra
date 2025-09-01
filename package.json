@@ -13,7 +13,10 @@
   },
   "keywords": [
     "react",
+    "react-zeltra",
+    "zeltra",
     "cli",
+    "cli-tool",
     "scaffold",
     "quickstart",
     "vite",
@@ -21,7 +24,7 @@
     "typescript",
     "boilerplate"
   ],
-  "author": "Your Name <your.email@example.com>",
+  "author": "Abhiram Ashok <abhiramashok1062004@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "chalk": "^5.3.0",
