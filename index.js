@@ -129,7 +129,7 @@ inquirer.prompt(questions).then(async (answers) => {
         const dependencies = [];
 
         if (tailwind) {
-            devDependencies.push('tailwindcss@^3.4.0', 'postcss', 'autoprefixer');
+            devDependencies.push('tailwindcss', '@tailwindcss/vite');
         }
 
         if (eslint) {
@@ -184,6 +184,7 @@ inquirer.prompt(questions).then(async (answers) => {
         if (tailwind) {
             console.log(chalk.blue('Configuring Tailwind CSS...'));
 
+            // Create tailwind.config.js manually (more reliable than npx init)
             const tailwindConfig = `/** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -197,19 +198,21 @@ export default {
 }`;
             writeFile('tailwind.config.js', tailwindConfig);
 
-            const postcssConfig = `export default {
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
-  },
-}`;
-            writeFile('postcss.config.js', postcssConfig);
+            const viteConfigPath = path.join(projectPath, `vite.config.${typescript ? 'ts' : 'js'}`);
+            const viteConfig = `import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+export default defineConfig({
+  plugins: [
+    react(),
+    tailwindcss(),
+  ],
+})`;
+            writeFile(viteConfigPath, viteConfig);
 
+            // Update CSS file
             const indexCssPath = 'src/index.css';
-            const tailwindCSS = `@tailwind base;
-@tailwind components;
-@tailwind utilities;
-`;
+            const tailwindCSS = `@import "tailwindcss";`;
             writeFile(indexCssPath, tailwindCSS);
         }
 
