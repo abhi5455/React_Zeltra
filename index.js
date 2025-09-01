@@ -333,7 +333,6 @@ const styles: { [key: string]: React.CSSProperties } = {
         justifyContent: "center",
         minHeight: "100vh",
         textAlign: "center",
-        padding: 20,
     },
     title: {
         fontSize: "2.25rem",
@@ -399,7 +398,6 @@ const styles: { [key: string]: React.CSSProperties } = {
         justifyContent: "center",
         minHeight: "100vh",
         textAlign: "center",
-        padding: 20,
     },
     title: {
         fontSize: "2.25rem",
