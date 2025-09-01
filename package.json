@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "bin": {
-    "quickstart-react": "./index.js"
+    "react-zeltra": "./index.js"
   },
   "scripts": {
     "start": "node bin/cli.js",

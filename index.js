@@ -313,11 +313,7 @@ export default App
             writeFile(`src/App.${typescript ? 'tsx' : 'jsx'}`, appContent);
         }
 
-        console.log(chalk.green(`\n✅ Setup completed successfully!`));
-        console.log(chalk.yellow(`\nNext steps:`));
-        console.log(chalk.cyan(`   cd ${projectName}`));
-        console.log(chalk.cyan(`   npm run dev`));
-
+        console.log(chalk.green(`\nSetup completed successfully!`));
         console.log(chalk.blue('\n📦 Installed packages:'));
         if (tailwind) console.log(chalk.green('  ✓ Tailwind CSS'));
         if (eslint) console.log(chalk.green('  ✓ ESLint'));
@@ -325,6 +321,10 @@ export default App
         if (stateManagement !== 'None') console.log(chalk.green(`  ✓ ${stateManagement}`));
         if (icons) console.log(chalk.green('  ✓ Lucide Icons'));
         if (axios) console.log(chalk.green('  ✓ Axios'));
+
+        console.log(chalk.yellow(`\nNext steps:`));
+        console.log(chalk.cyan(`   cd ${projectName}`));
+        console.log(chalk.cyan(`   npm run dev\n`));
 
     } catch (error) {
         console.log(chalk.red('\nSetup failed!'));
