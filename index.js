@@ -216,6 +216,16 @@ export default defineConfig({
             const tailwindCSS = `@import "tailwindcss";`;
             writeFile(indexCssPath, tailwindCSS);
         }
+        else{
+            // Update CSS file
+            const indexCssPath = 'src/index.css';
+            const tailwindCSS = `
+            body {
+                margin: 0;
+            }
+            `;
+            writeFile(indexCssPath, tailwindCSS);
+        }
 
         // Configure ESLint
         if (eslint) {
