@@ -32,10 +32,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/quickstart-react-cli"
+    "url": "https://github.com/abhi5455/QuickStart_React"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/quickstart-react-cli/issues"
+    "url": "https://github.com/abhi5455/QuickStart_React/issues"
   },
-  "homepage": "https://github.com/yourusername/quickstart-react-cli#readme"
+  "homepage": "https://github.com/abhi5455/QuickStart_React/blob/main/README.md"
 }
