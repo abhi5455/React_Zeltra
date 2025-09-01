@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import chalk from "chalk";
-import { execSync } from "child_process";
+import {execSync} from "child_process";
 import inquirer from "inquirer";
 import fs from "fs";
 import path from "path";
@@ -85,7 +85,7 @@ const questions = [
 function runCommand(command, options = {}) {
     try {
         console.log(chalk.gray(`Running: ${command}`));
-        execSync(command, { stdio: 'inherit', ...options });
+        execSync(command, {stdio: 'inherit', ...options});
     } catch (error) {
         console.log(chalk.red(`Failed to execute: ${command}`));
         console.log(chalk.red(`Error details: ${error.message}`));
@@ -105,7 +105,7 @@ function writeFile(filePath, content) {
 }
 
 inquirer.prompt(questions).then(async (answers) => {
-    const { projectName, typescript, eslint, tailwind, router, stateManagement, icons, axios } = answers;
+    const {projectName, typescript, eslint, tailwind, router, stateManagement, icons, axios} = answers;
 
     console.log(chalk.blue(`Creating project: ${projectName}`));
 
@@ -223,7 +223,7 @@ export default defineConfig({
 
             const eslintConfig = {
                 root: true,
-                env: { browser: true, es2020: true },
+                env: {browser: true, es2020: true},
                 extends: [
                     'eslint:recommended',
                     '@typescript-eslint/recommended',
@@ -235,7 +235,7 @@ export default defineConfig({
                 rules: {
                     'react-refresh/only-export-components': [
                         'warn',
-                        { allowConstantExport: true },
+                        {allowConstantExport: true},
                     ],
                 },
             };
@@ -250,10 +250,11 @@ export default defineConfig({
         }
 
         // Create basic router setup
+        let appContent = '';
         if (router) {
             console.log(chalk.blue('Setting up React Router...'));
 
-            const appContent = typescript ? `
+            appContent = `
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
 
 function Home() {
@@ -353,7 +354,9 @@ const styles: { [key: string]: React.CSSProperties } = {
         letterSpacing: "0.01em",
     },
 }
-` : `
+`
+        } else {
+            appContent = `
 export default function App() {
     return (
         <div style={styles.app}>
@@ -408,9 +411,10 @@ const styles: { [key: string]: React.CSSProperties } = {
     },
 }
 `;
-
-            writeFile(`src/App.${typescript ? 'tsx' : 'jsx'}`, appContent);
         }
+
+        writeFile(`src/App.${typescript ? 'tsx' : 'jsx'}`, appContent);
+
 
         console.log(chalk.green(`\nSetup completed successfully!`));
         console.log(chalk.blue('\n📦 Installed packages:'));
