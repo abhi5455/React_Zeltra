@@ -1,7 +1,7 @@
 {
-  "name": "quickstart-react-cli",
+  "name": "react-zeltra",
   "version": "1.0.0",
-  "description": "A CLI tool to quickly scaffold React projects with popular libraries pre-configured",
+  "description": "Kickstart React projects with Vite, TypeScript, Tailwind, ESLint, Router, State management, Lucide, and Axios.",
   "main": "index.js",
   "type": "module",
   "bin": {
