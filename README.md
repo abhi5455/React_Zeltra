@@ -1,4 +1,4 @@
-# Quickstart React CLI
+# React ZELTRA
 
 A powerful CLI tool to quickly scaffold React projects with popular libraries and configurations pre-setup.
 
@@ -37,6 +37,10 @@ Or with npx:
 ```bash
 npx react-zeltra
 ```
+## Why “ZELTRA”? 
+Because it’s a mashup of the things that usually give you headaches: </br>
+Zustand / Redux, ESLint, Lucide, Tailwind, React Router, Axios… boom, ZELTRA! ⚡ </br> 
+Everything you need, all in one, no more hunting around for configs.
 
 ## What it does
 
