@@ -220,11 +220,11 @@ export default defineConfig({
             // Update CSS file
             const indexCssPath = 'src/index.css';
             const tailwindCSS = `
-            body {
-                margin: 0;
-                font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-            }
-            `;
+body {
+    margin: 0;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+`;
             writeFile(indexCssPath, tailwindCSS);
         }
 
