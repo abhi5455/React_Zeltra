@@ -222,6 +222,7 @@ export default defineConfig({
             const tailwindCSS = `
             body {
                 margin: 0;
+                font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
             }
             `;
             writeFile(indexCssPath, tailwindCSS);
