@@ -84,9 +84,11 @@ const questions = [
 // Helper function to run commands safely
 function runCommand(command, options = {}) {
     try {
+        console.log(chalk.gray(`Running: ${command}`));
         execSync(command, { stdio: 'inherit', ...options });
     } catch (error) {
         console.log(chalk.red(`Failed to execute: ${command}`));
+        console.log(chalk.red(`Error details: ${error.message}`));
         throw error;
     }
 }
@@ -127,7 +129,7 @@ inquirer.prompt(questions).then(async (answers) => {
         const dependencies = [];
 
         if (tailwind) {
-            devDependencies.push('tailwindcss', 'postcss', 'autoprefixer');
+            devDependencies.push('tailwindcss@^3.4.0', 'postcss', 'autoprefixer');
         }
 
         if (eslint) {
@@ -182,7 +184,6 @@ inquirer.prompt(questions).then(async (answers) => {
         if (tailwind) {
             console.log(chalk.blue('Configuring Tailwind CSS...'));
 
-            // Create tailwind.config.js manually (more reliable than npx init)
             const tailwindConfig = `/** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -196,7 +197,6 @@ export default {
 }`;
             writeFile('tailwind.config.js', tailwindConfig);
 
-            // Create postcss.config.js manually
             const postcssConfig = `export default {
   plugins: {
     tailwindcss: {},
@@ -205,7 +205,6 @@ export default {
 }`;
             writeFile('postcss.config.js', postcssConfig);
 
-            // Update CSS file
             const indexCssPath = 'src/index.css';
             const tailwindCSS = `@tailwind base;
 @tailwind components;
@@ -311,7 +310,10 @@ export default App
             writeFile(`src/App.${typescript ? 'tsx' : 'jsx'}`, appContent);
         }
 
-        console.log(chalk.green(`\nSetup completed successfully!`));
+        console.log(chalk.green(`\n✅ Setup completed successfully!`));
+        console.log(chalk.yellow(`\nNext steps:`));
+        console.log(chalk.cyan(`   cd ${projectName}`));
+        console.log(chalk.cyan(`   npm run dev`));
 
         console.log(chalk.blue('\n📦 Installed packages:'));
         if (tailwind) console.log(chalk.green('  ✓ Tailwind CSS'));
@@ -320,11 +322,6 @@ export default App
         if (stateManagement !== 'None') console.log(chalk.green(`  ✓ ${stateManagement}`));
         if (icons) console.log(chalk.green('  ✓ Lucide Icons'));
         if (axios) console.log(chalk.green('  ✓ Axios'));
-
-
-        console.log(chalk.yellow(`\nNext steps:`));
-        console.log(chalk.cyan(`   cd ${projectName}`));
-        console.log(chalk.cyan(`   npm run dev\n`));
 
     } catch (error) {
         console.log(chalk.red('\nSetup failed!'));
