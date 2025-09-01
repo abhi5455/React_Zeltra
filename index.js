@@ -104,6 +104,89 @@ function writeFile(filePath, content) {
     }
 }
 
+// Helper Function to create Directory if not exists
+function ensureDir(dirPath) {
+    if (!fs.existsSync(dirPath)) {
+        fs.mkdirSync(dirPath, { recursive: true });
+        console.log(chalk.gray(`Created directory: ${dirPath}`));
+    }
+}
+
+
+function createZustandStore(typescript) {
+    console.log(chalk.blue('Setting up Zustand store...'));
+
+    // Create a basic store file
+    const zustandStoreContent = `import { create } from 'zustand';
+
+const useStore = create((set) => ({
+    count: 0,
+    increment: () => set((state) => ({ count: state.count + 1 })),
+    decrement: () => set((state) => ({ count: state.count - 1 })),
+}));
+
+export default useStore;
+`;
+    ensureDir('src/store');
+    writeFile(`src/store/store.${typescript ? 'ts' : 'js'}`, zustandStoreContent);
+
+}
+
+function createReduxStore(typescript) {
+    console.log(chalk.blue('Setting up Redux store...'));
+
+    // Create a basic Redux store file
+    const reduxStoreContent = `import { configureStore, createSlice } from '@reduxjs/toolkit';
+
+// Define a slice
+const counterSlice = createSlice({
+    name: "counter",
+    initialState: { value: 0 },
+    reducers: {
+        increment: (state) => { state.value += 1 },
+        decrement: (state) => { state.value -= 1 },
+        reset: (state) => { state.value = 0 },
+    },
+});
+
+// Export actions
+export const { increment, decrement, reset } = counterSlice.actions;
+
+// Configure store
+export const store = configureStore({
+    reducer: {
+        counter: counterSlice.reducer,
+    },
+});
+`;
+
+    ensureDir('src/store');
+    writeFile(`src/store/store.${typescript ? 'ts' : 'js'}`, reduxStoreContent);
+
+    // Update main entry file safely
+    const indexFilePath = `src/main.${typescript ? 'tsx' : 'jsx'}`;
+    let indexFileContent = fs.readFileSync(indexFilePath, 'utf-8');
+
+    // Ensure Provider + store imports
+    if (!indexFileContent.includes('react-redux')) {
+        indexFileContent = `import { Provider } from 'react-redux';
+import { store } from './store/store';
+
+` + indexFileContent;
+    }
+
+    // Inject Provider around <App />
+    if (!indexFileContent.includes('<Provider store={store}>')) {
+        indexFileContent = indexFileContent.replace(
+            /(<App\s*\/>)/,
+            `<Provider store={store}>$1</Provider>`
+        );
+    }
+
+    writeFile(indexFilePath, indexFileContent);
+}
+
+
 inquirer.prompt(questions).then(async (answers) => {
     const {projectName, typescript, eslint, tailwind, router, stateManagement, icons, axios} = answers;
 
@@ -424,6 +507,13 @@ const styles: { [key: string]: React.CSSProperties } = {
 
         writeFile(`src/App.${typescript ? 'tsx' : 'jsx'}`, appContent);
 
+
+        // Setup state management
+        if (stateManagement === 'Zustand') {
+            createZustandStore(typescript);
+        } else if (stateManagement === 'Redux Toolkit') {
+            createReduxStore(typescript);
+        }
 
         console.log(chalk.green(`\nSetup completed successfully!`));
         console.log(chalk.blue('\n📦 Installed packages:'));
