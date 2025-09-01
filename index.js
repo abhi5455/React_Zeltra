@@ -167,7 +167,7 @@ export const store = configureStore({
     const indexFilePath = `src/main.${typescript ? 'tsx' : 'jsx'}`;
     let indexFileContent = fs.readFileSync(indexFilePath, 'utf-8');
 
-    // Ensure Provider + store imports
+    // Provider + store imports
     if (!indexFileContent.includes('react-redux')) {
         indexFileContent = `import { Provider } from 'react-redux';
 import { store } from './store/store';
@@ -175,7 +175,7 @@ import { store } from './store/store';
 ` + indexFileContent;
     }
 
-    // Inject Provider around <App />
+    // Wrap Provider around <App />
     if (!indexFileContent.includes('<Provider store={store}>')) {
         indexFileContent = indexFileContent.replace(
             /(<App\s*\/>)/,
@@ -267,7 +267,7 @@ inquirer.prompt(questions).then(async (answers) => {
         if (tailwind) {
             console.log(chalk.blue('Configuring Tailwind CSS...'));
 
-            // Create tailwind.config.js manually (more reliable than npx init)
+            // Create tailwind.config.js
             const tailwindConfig = `/** @type {import('tailwindcss').Config} */
 export default {
   content: [
