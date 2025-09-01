@@ -1,20 +1,41 @@
 {
-  "name": "quickstart-react",
+  "name": "quickstart-react-cli",
   "version": "1.0.0",
+  "description": "A CLI tool to quickly scaffold React projects with popular libraries pre-configured",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "type": "module",
   "bin": {
-    "quickstart-react": "index.js"
+    "quickstart-react": "./index.js"
   },
+  "scripts": {
+    "start": "node bin/cli.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "cli",
+    "scaffold",
+    "quickstart",
+    "vite",
+    "tailwind",
+    "typescript",
+    "boilerplate"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
   "dependencies": {
-    "chalk": "^5.6.0",
-    "inquirer": "^12.9.4"
-  }
+    "chalk": "^5.3.0",
+    "inquirer": "^9.2.12"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/quickstart-react-cli"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/quickstart-react-cli/issues"
+  },
+  "homepage": "https://github.com/yourusername/quickstart-react-cli#readme"
 }
