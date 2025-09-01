@@ -17,12 +17,12 @@ A powerful CLI tool to quickly scaffold React projects with popular libraries an
 
 ### Global Installation
 ```bash
-npm install -g quickstart-react-cli
+npm install -g react-zeltra
 ```
 
 ### Use with npx (Recommended)
 ```bash
-npx quickstart-react-cli
+npx react-zeltra
 ```
 
 ## Usage
@@ -30,12 +30,12 @@ npx quickstart-react-cli
 Simply run the command and follow the interactive prompts:
 
 ```bash
-quickstart-react
+react-zeltra
 ```
 
 Or with npx:
 ```bash
-npx quickstart-react-cli
+npx react-zeltra
 ```
 
 ## What it does
