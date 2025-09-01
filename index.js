@@ -253,62 +253,160 @@ export default defineConfig({
         if (router) {
             console.log(chalk.blue('Setting up React Router...'));
 
-            const appContent = typescript ? `import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import './App.css'
+            const appContent = typescript ? `
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
 
 function Home() {
-  return <h1>Home Page</h1>
+    return (
+        <main style={styles.page} aria-labelledby="home-title">
+            <h1 id="home-title" style={styles.title}>
+                Welcome to Your New React App
+            </h1>
+            <p style={styles.text}>
+                This project was created using <code style={styles.code}>npx react-zeltra</code>.
+            </p>
+            <Link
+                to="/about"
+                style={styles.button}
+            >
+                Go to About Page
+            </Link>
+        </main>
+    )
 }
 
 function About() {
-  return <h1>About Page</h1>
+    return (
+        <main style={styles.page} aria-labelledby="about-title">
+            <h1 id="about-title" style={styles.title}>
+                About This App
+            </h1>
+            <p style={styles.text}>This is a simple starter template with React + React Router.</p>
+            <Link
+                to="/"
+                style={styles.button}
+            >
+                Back to Home
+            </Link>
+        </main>
+    )
 }
 
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <nav>
-          <a href="/">Home</a> | <a href="/about">About</a>
-        </nav>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-        </Routes>
-      </div>
-    </Router>
-  )
+export default function App() {
+    return (
+        <div style={styles.app}>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about" element={<About />} />
+                </Routes>
+            </Router>
+        </div>
+    )
 }
 
-export default App
-` : `import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import './App.css'
-
-function Home() {
-  return <h1>Home Page</h1>
+const styles: { [key: string]: React.CSSProperties } = {
+    app: {
+        minHeight: "100vh",
+        background:
+            "radial-gradient(1000px 600px at 10% 10%, rgba(37,99,235,0.28), rgba(37,99,235,0) 60%)," +
+            "radial-gradient(800px 500px at 85% 25%, rgba(20,184,166,0.25), rgba(20,184,166,0) 60%)," +
+            "linear-gradient(180deg, #0b1020 0%, #0b1020 100%)",
+        position: "relative",
+    },
+    page: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "100vh",
+        textAlign: "center",
+        padding: 20,
+    },
+    title: {
+        fontSize: "2.25rem",
+        lineHeight: 1.2,
+        color: "#ffffff",
+        marginBottom: "1rem",
+        letterSpacing: "-0.01em",
+    },
+    text: {
+        fontSize: "1rem",
+        color: "rgba(255,255,255,0.8)",
+        marginBottom: "1.5rem",
+        maxWidth: 600,
+    },
+    code: {
+        background: "rgba(255,255,255,0.08)",
+        color: "#ffffff",
+        padding: "2px 6px",
+        borderRadius: 6,
+    },
+    button: {
+        padding: "10px 20px",
+        backgroundColor: "#2563eb",
+        color: "#ffffff",
+        textDecoration: "none",
+        borderRadius: 8,
+        display: "inline-block",
+        fontWeight: 600,
+        letterSpacing: "0.01em",
+    },
+}
+` : `
+export default function App() {
+    return (
+        <div style={styles.app}>
+            <div style={styles.page} aria-labelledby="home-title">
+                <h1 id="home-title" style={styles.title}>
+                    Welcome to Your New React App
+                </h1>
+                <p style={styles.text}>
+                    This project was created using <code style={styles.code}>npx react-zeltra</code>.
+                </p>
+            </div>
+        </div>
+    )
 }
 
-function About() {
-  return <h1>About Page</h1>
+const styles: { [key: string]: React.CSSProperties } = {
+    app: {
+        minHeight: "100vh",
+        background:
+            "radial-gradient(1000px 600px at 10% 10%, rgba(37,99,235,0.28), rgba(37,99,235,0) 60%)," +
+            "radial-gradient(800px 500px at 85% 25%, rgba(20,184,166,0.25), rgba(20,184,166,0) 60%)," +
+            "linear-gradient(180deg, #0b1020 0%, #0b1020 100%)",
+        position: "relative",
+    },
+    page: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "100vh",
+        textAlign: "center",
+        padding: 20,
+    },
+    title: {
+        fontSize: "2.25rem",
+        lineHeight: 1.2,
+        color: "#ffffff",
+        marginBottom: "1rem",
+        letterSpacing: "-0.01em",
+    },
+    text: {
+        fontSize: "1rem",
+        color: "rgba(255,255,255,0.8)",
+        marginBottom: "1.5rem",
+        maxWidth: 600,
+    },
+    code: {
+        background: "rgba(255,255,255,0.08)",
+        color: "#ffffff",
+        padding: "2px 6px",
+        borderRadius: 6,
+    },
 }
-
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <nav>
-          <a href="/">Home</a> | <a href="/about">About</a>
-        </nav>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-        </Routes>
-      </div>
-    </Router>
-  )
-}
-
-export default App
 `;
 
             writeFile(`src/App.${typescript ? 'tsx' : 'jsx'}`, appContent);
