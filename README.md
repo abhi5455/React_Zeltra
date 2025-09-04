@@ -66,6 +66,9 @@ my-react-app/
 └── vite.config.ts      # Vite configuration
 ```
 
+## See It in Action
+![img.png](/public/firstlook_without_router.png)
+
 ## Requirements
 
 - Node.js 16 or higher
